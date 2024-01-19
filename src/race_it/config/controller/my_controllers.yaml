@@ -21,7 +21,7 @@ asc:
     use_stamped_vel: true
 
     rear_wheels_names: [rear_right_joint, rear_left_joint]
-    front_wheels_names: [front_right_joint, front_left_joint]
+    front_wheels_names: [front_right_hinge_joint, front_left_hinge_joint]
 
 
     wheelbase: 1.0

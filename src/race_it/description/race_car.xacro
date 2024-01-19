@@ -34,6 +34,33 @@
 
 
 
+    <xacro:property name="hinge_width" value="0.04"/>
+    <xacro:property name="hinge_radius" value="0.02"/>
+    
+    <!-- Hinge macro -->
+    <xacro:macro name="hinge" params="name"> 
+        <link name="${name}">
+            <visual>
+                <geometry>
+                    <cylinder length="${hinge_width}" radius="${hinge_radius}" />
+                </geometry>
+                <material name="blue"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder length="${hinge_width}" radius="${hinge_radius}" />
+                </geometry>
+            </collision>
+             <xacro:inertial_cylinder mass="0.1" length="${hinge_width}" radius="${hinge_radius}"/>    
+        </link>
+        
+        <gazebo reference="${name}">
+            <material>Gazebo/Blue</material>
+        </gazebo>   
+
+    </xacro:macro>
+
+
   <!-- Base Link -->
   
   <link name="base_link">
@@ -67,36 +94,76 @@
       <origin xyz="0 0 0.2" rpy="0 0 0 "/>
   </joint>    
     
+
+  <!-- Front Left Hinge -->
+  <xacro:hinge name="front_left_hinge"/>
   
-  <!-- Front Left Wheel -->
-  <xacro:wheel name="front_left_link"/>
-  
-  <joint name="front_left_joint" type="revolute">
+  <joint name="front_left_hinge_joint" type="revolute">
         <parent link="chassis_link"/>
-        <child link="front_left_link"/>
-        <origin xyz="-0.25 0.5 -0.1" rpy="0 ${-pi/2} 0"/>
+        <child link="front_left_hinge"/>
+        <!-- <origin xyz="-0.25 0.5 -0.1" rpy="0 ${-pi/2} 0"/> -->
+        <origin xyz="-0.27 0.48 -0.08" rpy="0 ${-pi/2} 0"/>
         <limit upper="0.5236" lower="-0.5236" velocity="20" effort="1"/>
         <axis xyz="1 0 0"/>
   </joint>
   
-   <gazebo reference="front_left_link">
-       <material>Gazebo/Red</material>   
+   <gazebo reference="front_left_hinge">
+       <material>Gazebo/Green</material>   
        <!--
        <mu1 value="0.001"/>
        <mu2 value="0.001"/>
        -->
    </gazebo>
   
+  <!-- Front Left Wheel -->
+  <xacro:wheel name="front_left_link"/>
   
+  <joint name="front_left_joint" type="continuous">
+        <parent link="front_left_hinge"/>
+        <child link="front_left_link"/>
+        <!-- <origin xyz="-0.25 0.5 -0.1" rpy="0 ${-pi/2} 0"/> -->
+        <origin xyz="0.0 0.0 0.04" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+  </joint>
+  
+   <gazebo reference="front_left_link">
+       <material>Gazebo/Red</material>   
+       <!-- 
+       <mu1 value="0.001"/>
+       <mu2 value="0.001"/>
+       -->
+   </gazebo>
+
+
+  <!-- Front Right Hinge -->
+  <xacro:hinge name="front_right_hinge"/>
+  
+  <joint name="front_right_hinge_joint" type="revolute">
+        <parent link="chassis_link"/>
+        <child link="front_right_hinge"/>
+        <!-- <origin xyz="-0.25 0.5 -0.1" rpy="0 ${-pi/2} 0"/> -->
+        <origin xyz="0.27 0.48 -0.08" rpy="0 ${-pi/2} 0"/>
+        <limit upper="0.5236" lower="-0.5236" velocity="20" effort="1"/>
+        <axis xyz="1 0 0"/>
+  </joint>
+  
+   <gazebo reference="front_right_hinge">
+       <material>Gazebo/Green</material>   
+       <!--
+       <mu1 value="0.001"/>
+       <mu2 value="0.001"/>
+       -->
+   </gazebo>
+
   <!-- Front Right Wheel -->
   <xacro:wheel name="front_right_link"/>
   
-  <joint name="front_right_joint" type="revolute">
-        <parent link="chassis_link"/>
+  <joint name="front_right_joint" type="continuous">
+        <parent link="front_right_hinge"/>
         <child link="front_right_link"/>
-        <origin xyz="0.25 0.5 -0.1" rpy="0 ${-pi/2} 0"/>
-        <limit upper="0.5236" lower="-0.5236" velocity="20" effort="1"/>
-        <axis xyz="1 0 0"/>
+        <!-- <origin xyz="0.25 0.5 -0.1" rpy="0 ${-pi/2} 0"/> -->
+        <origin xyz="0 0 -0.04" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
   </joint>
   
   <gazebo reference="front_right_link">   
@@ -114,8 +181,7 @@
   <joint name="rear_left_joint" type="continuous">
         <parent link="chassis_link"/>
         <child link="rear_left_link"/>
-        <origin xyz="-0.25 -0.5 -0.1" rpy="0 ${-pi/2} 0"/>
-        <limit upper="0.5236" lower="-0.5236" velocity="20" effort="1"/>
+        <origin xyz="-0.31 -0.48 -0.08" rpy="0 ${-pi/2} 0"/>
         <axis xyz="0 0 1"/>
   </joint>
     
@@ -125,7 +191,7 @@
   <joint name="rear_right_joint" type="continuous">
         <parent link="chassis_link"/>
         <child link="rear_right_link"/>
-        <origin xyz="0.25 -0.5 -0.1" rpy="0 ${-pi/2} 0"/> <!-- Default value for x is "0.27" -->
+        <origin xyz="0.31 -0.48 -0.08" rpy="0 ${-pi/2} 0"/> <!-- Default value for x is "0.27" -->
         <axis xyz="0 0 1"/>
   </joint>
   
