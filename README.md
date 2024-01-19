@@ -6,11 +6,8 @@ Process to reproduce error:
 * colcon build --symlink-install
 * source install/setup.bash
 * ros2 launch race_it rsp.launch.py
-  
-2. Open another terminal and execute the following in sequence:
-* ros2 run controller_manager spawner asc
 
-3. Open another terminal and execute the following in sequence:
+2. Open another terminal and execute the following in sequence:
 * source install/setup.bash
 * ros2 run temp_teleop talker
 
