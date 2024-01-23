@@ -155,7 +155,7 @@ def main():
     spinner = threading.Thread(target=rclpy.spin, args=(node,))
     spinner.start()
 
-    speed = 0.5   # Default 0.5
+    speed = 1.0   # Default 0.5
     turn = 1.0
     x = 0.0
     y = 0.0
