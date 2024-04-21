@@ -150,7 +150,7 @@ def main():
         TwistMsg = geometry_msgs.msg.Twist
 
     #pub = node.create_publisher(TwistMsg, 'cmd_vel', 10)
-    pub = node.create_publisher(TwistMsg, '/asc/reference', 10)
+    pub = node.create_publisher(TwistMsg, '/asc/reference', 50)
 
     spinner = threading.Thread(target=rclpy.spin, args=(node,))
     spinner.start()

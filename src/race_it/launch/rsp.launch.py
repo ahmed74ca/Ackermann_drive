@@ -73,7 +73,7 @@ def generate_launch_description():
     
     ackermann_spawner = Node(
     package="controller_manager",
-    executable="spawner.py",
+    executable="spawner",
     arguments=["asc"],
 )
 
