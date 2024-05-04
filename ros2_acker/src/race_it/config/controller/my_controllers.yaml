@@ -19,7 +19,9 @@ asc:
     velocity_rolling_window_size: 10
     position_feedback: false
     use_stamped_vel: true
-
+    # base_frame_id: base_link
+    # odom_frame_id: odom
+    # enable_odom_tf: true
     rear_wheels_names: [rear_right_joint, rear_left_joint]
     front_wheels_names: [front_right_hinge_joint, front_left_hinge_joint]
 

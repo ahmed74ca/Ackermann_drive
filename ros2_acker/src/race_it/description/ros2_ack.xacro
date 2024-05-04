@@ -35,17 +35,18 @@
             <command_interface name="velocity"/>
             <state_interface name="velocity" />
         </joint>      
+        
     </ros2_control>
     
     <gazebo>
         <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control"> 
-            <!--
+            
             <ros> 
                 <remapping>asc/reference_unstamped:=cmd_vel</remapping>       
                 <remapping>asc/odometry:=odom</remapping> 
                 <remapping>asc/tf_odometry:=tf</remapping> 
             </ros> 
-            -->
+           
             <parameters>$(find race_it)/config/controller/my_controllers.yaml</parameters>
         </plugin>
     </gazebo>
